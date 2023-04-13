@@ -5,6 +5,7 @@ import './App.css'
 import { CssBaseline } from '@mui/material'
 import { Base } from './Layout'
 import { Theme } from './Layout/ThemeProvider'
+import { PaginaPerfis } from './Paginas/PaginaPerfis'
 
 function App() {
  return(
@@ -12,7 +13,7 @@ function App() {
   <Theme>
   <CssBaseline/>
   <Base appBarTitle="Buscador de Perfis">
-
+    <PaginaPerfis />
   </Base>
   </Theme>
   </>
