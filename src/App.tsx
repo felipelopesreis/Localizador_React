@@ -6,18 +6,39 @@ import { CssBaseline, TextField, Button, Grid, Box, CircularProgress, Card, Card
 import { Base } from './Layout'
 import { Theme } from './Layout/ThemeProvider'
 import { PaginaPerfis } from './Paginas/PaginaPerfis'
-import {useQuery} from '@tanstack/react-query'
-import { getUser } from '../'
+
+
+import { getUser } from './Services/api'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
-type user={
-  avatarURL: String,
-  htmlURL: String,
-  name: String
+type User={
+  avatarURL: string,
+  htmlURL: string,
+  name: string,
+  followers: string, 
+  following: string
+
+}
+
+
+
+const initialUser:User = {
+  avatarURL: "",
+  htmlURL: "",
+  name: "",
+  followers: "", 
+  following: ""
 }
 function App() {
 
-  const [user, setUser] = useState<User>({avatar_url:"",html_url:""});
+
+  const {} = useQuery({
+    queryKey: "user-github",
+    queryFn:getUser
+  })
+
+
+  const [user, setUser] = useState<user>({avatar_url:"",html_url:""});
 
   const handleSubmit = (event:FormEvent<HTMLFormElement)=>{
     event.preventDefault()
@@ -51,7 +72,7 @@ function App() {
     <form onSubmit={handleSubmit}>
       <TextField label='Nome do perfil' fullWidth name="userName"/>
       <Button variant='contained' type='submit'>Buscar</Button>
-        <ConsultasPerfis/>
+      
      </form>   
   </Box>
   </Grid>
