@@ -9,13 +9,14 @@ import { PaginaPerfis } from './Paginas/PaginaPerfis'
 
 
 import { getUser } from './Services/api'
-import { QueryClient, QueryClientProvider } from 'react-query'
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
 
 type User={
   avatarURL: string,
   htmlURL: string,
   name: string,
-  followers: string, 
+  followers: string,
+  bio: string, 
   following: string
 
 }
@@ -27,18 +28,15 @@ const initialUser:User = {
   htmlURL: "",
   name: "",
   followers: "", 
+  bio: "",
   following: ""
 }
 function App() {
 
 
-  const {} = useQuery({
-    queryKey: "user-github",
-    queryFn:getUser
-  })
+ 
 
-
-  const [user, setUser] = useState<user>({avatar_url:"",html_url:""});
+  const [user, setUser] = useState<User>({avatar_url:"",html_url:"",name:"",followers:"",bio:"",following:""});
 
   const handleSubmit = (event:FormEvent<HTMLFormElement)=>{
     event.preventDefault()
@@ -82,7 +80,12 @@ function App() {
   ):(
       <Card>
         <CardContent>
-          <Avatar src={user.avatar_url}/>
+          <Avatar src={user.avatarURL}/>
+          <Avatar src={user.htmlURL}/>
+          <Avatar src={user.name}/>
+          <Avatar src={user.followers}/>
+          <Avatar src={user.bio}/>
+          <Avatar src={user.following}/>
           <Typography variant='h4'>
             {user.name}
           </Typography>
